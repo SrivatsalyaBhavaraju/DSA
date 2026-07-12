@@ -1,16 +1,14 @@
 console.log("🚀 DSA Sync Loaded");
 
-// Listen for messages from the popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
-    if (request.type === "GET_PROBLEM_INFO") {
+    console.log("Request:", request);
 
-        // Get the page title
-        const title = document.title;
+    console.log("window.monaco =", window.monaco);
 
-        sendResponse({
-            title: title
-        });
-    }
+    sendResponse({
+        code: "hello"
+    });
 
+    return true;
 });

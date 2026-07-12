@@ -76,25 +76,16 @@ document.getElementById("save").addEventListener("click", async () => {
     // Read code directly from Monaco editor
     // ---------------------------------------
 
-    const codeResult = await chrome.scripting.executeScript({
+   const response = await chrome.tabs.sendMessage(
+    currentTab.id,
+    {
+        type: "GET_PAGE_DATA"
+    }
+);
 
-        target: {
+const code = response.code;
 
-            tabId: currentTab.id
-
-        },
-
-        func: () => {
-
-            return typeof window.monaco;
-
-        }
-
-    });
-
-    console.log(codeResult);
-
-const code = codeResult[0].result;
+console.log(code);
 
 console.log(code);
 
