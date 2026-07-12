@@ -1,10 +1,14 @@
-// -------------------------
-// Get current problem title
-// -------------------------
+// ------------------------------
+// Load current problem title
+// ------------------------------
+
+let currentTab = null;
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
-    const url = tabs[0].url;
+    currentTab = tabs[0];
+
+    const url = currentTab.url;
 
     const slug = url
         .split("/problems/")[1]
@@ -15,14 +19,13 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
 
-    document.getElementById("problem").textContent =
-        problemTitle;
+    document.getElementById("problem").textContent = problemTitle;
 
 });
 
-// -------------------------
+// ------------------------------
 // Approach Buttons
-// -------------------------
+// ------------------------------
 
 const buttons = document.querySelectorAll(".approach");
 
@@ -40,14 +43,22 @@ buttons.forEach(button => {
 
 });
 
-// -------------------------
-// Save
-// -------------------------
+// ------------------------------
+// Save Button
+// ------------------------------
 
 document.getElementById("save").addEventListener("click", async () => {
 
     const problemNumber =
         document.getElementById("problemNumber").value;
+
+    if(problemNumber === ""){
+
+        alert("Please enter the problem number.");
+
+        return;
+
+    }
 
     const problemTitle =
         document.getElementById("problem").textContent;
@@ -61,13 +72,31 @@ document.getElementById("save").addEventListener("click", async () => {
     const approach =
         document.querySelector(".approach.active").textContent.trim();
 
-    if(problemNumber===""){
+    // ---------------------------------------
+    // Read code directly from Monaco editor
+    // ---------------------------------------
 
-        alert("Please enter the problem number.");
+    const codeResult = await chrome.scripting.executeScript({
 
-        return;
+        target: {
 
-    }
+            tabId: currentTab.id
+
+        },
+
+        func: () => {
+
+            return typeof window.monaco;
+
+        }
+
+    });
+
+    console.log(codeResult);
+
+const code = codeResult[0].result;
+
+console.log(code);
 
     const submission = {
 
@@ -83,37 +112,56 @@ document.getElementById("save").addEventListener("click", async () => {
 
         language: "cpp",
 
-        code: "// Temporary"
+        code: code
 
     };
 
-        try{
-
+    try{
+        console.log(submission);
         const response = await fetch(
+
             "http://127.0.0.1:8000/submit",
+
             {
+
                 method:"POST",
+
                 headers:{
                     "Content-Type":"application/json"
                 },
+
                 body:JSON.stringify(submission)
+
             }
+
         );
+
+       if (!response.ok) {
+
+    const error = await response.text();
+
+    console.log(error);
+
+    alert(error);
+
+    return;
+
+}
 
         const result = await response.json();
 
         console.log(result);
 
-        alert("✅ Saved Successfully!");
+        alert("✅ Saved to GitHub!");
 
     }
+
     catch(error){
 
-        console.error("Fetch Error:", error);
+        console.error(error);
 
         alert(error.message);
 
     }
 
 });
-
