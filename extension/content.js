@@ -3,16 +3,11 @@ console.log("🚀 DSA Sync Loaded");
 // --------------------------------------------------
 // Inject page.js into the page context
 // --------------------------------------------------
-
 const script = document.createElement("script");
 
-script.src = chrome.runtime.getURL("page.js");
+script.src = chrome.runtime.getURL("page_bridge.js");
 
-script.onload = function () {
-
-    this.remove();
-
-};
+script.onload = () => script.remove();
 
 (document.head || document.documentElement).appendChild(script);
 
@@ -38,33 +33,39 @@ window.addEventListener("message", (event) => {
 // Listen for popup requests
 // --------------------------------------------------
 
+
+
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
-    if (request.type === "GET_PAGE_DATA") {
+    if (request.type !== "GET_PAGE_DATA")
+        return;
 
-        // Ask page.js to fetch latest code
+    function handler(event) {
 
-        window.postMessage({
+        if (event.data?.type !== "DSA_CODE")
+            return;
 
-            type: "GET_MONACO_CODE"
+        window.removeEventListener("message", handler);
+
+        sendResponse({
+
+            title: document.title,
+
+            code: event.data.code
 
         });
 
-        // Give page.js a tiny moment to respond
-
-        setTimeout(() => {
-
-            sendResponse({
-
-                title: document.title,
-
-                code: latestCode
-
-            });
-
-        }, 100);
-
-        return true;
     }
+
+    window.addEventListener("message", handler);
+
+    window.postMessage({
+
+        type: "GET_DSA_CODE"
+
+    }, "*");
+
+    return true;
 
 });

@@ -37,8 +37,12 @@
   ],
   "web_accessible_resources": [
   {
-    "resources": ["page.js"],
-    "matches": ["https://leetcode.com/*"]
+    "resources": [
+      "page_bridge.js"
+    ],
+    "matches": [
+      "https://leetcode.com/*"
+    ]
   }
 ]
   
