@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from models import Submission
 from file_manager import FileManager
-
+from git_manager import GitManager
 app = FastAPI(
     title="DSA Automation API",
     version="1.0"
@@ -34,8 +34,12 @@ def submit_solution(data: Submission):
 
     # Save the solution
     saved_file = FileManager.save_solution(data)
-
+    commit_message = GitManager.commit_and_push(
+    saved_file,
+    data
+)
     return {
         "success": True,
-        "saved_to": str(saved_file)
+        "saved_to": str(saved_file),
+        "commit": commit_message
     }
