@@ -14,12 +14,13 @@
     "tabs",
     "scripting"
   ],
+  
 
   "host_permissions": [
     "https://leetcode.com/*",
     "http://127.0.0.1:8000/*"
   ],
-
+  
   "background": {
     "service_worker": "background.js"
   },
@@ -33,5 +34,14 @@
         "content.js"
       ]
     }
-  ]
+  ],
+  "web_accessible_resources": [
+  {
+    "resources": ["page.js"],
+    "matches": ["https://leetcode.com/*"]
+  }
+]
+  
+  
+
 }

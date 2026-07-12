@@ -82,8 +82,11 @@ document.getElementById("save").addEventListener("click", async () => {
         type: "GET_PAGE_DATA"
     }
 );
-
+console.log("Response:", response);
+console.log("Code:", response.code);
 const code = response.code;
+
+
 
 console.log(code);
 
