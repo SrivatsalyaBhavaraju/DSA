@@ -22,6 +22,7 @@ def submit_solution(data: Submission):
 
     print(f"Problem : {data.problem_number}")
     print(f"Title    : {data.problem_title}")
+    print(f"Category : {data.category}")
     print(f"Pattern  : {data.pattern}")
     print(f"Approach : {data.approach}")
     print(f"Language : {data.language}")
