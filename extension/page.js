@@ -17,7 +17,7 @@ window.addEventListener("message", (event) => {
 
     } catch (e) {
 
-        console.error(e);
+        code = null;
 
     }
 
