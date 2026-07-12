@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from constants import SOLUTIONS_DIR, LANGUAGE_EXTENSIONS
+from constants import SOLUTIONS_DIR, LANGUAGE_EXTENSIONS, APPROACH_MAP
 
 
 class FileManager:
@@ -40,13 +40,9 @@ class FileManager:
         # Decide filename
         # ----------------------------
 
-        approach_map = {
-            "Brute Force": "01_brute_force",
-            "Better": "02_better",
-            "Optimal": "03_optimal",
-        }
+        filename = APPROACH_MAP[data.approach]
 
-        filename = approach_map[data.approach]
+        
 
         # ----------------------------
         # Decide extension

@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "DSA Sync",
+  "description": "Automatically organize accepted LeetCode solutions.",
+  "version": "1.0",
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "DSA Sync"
+  },
+
+  "permissions": [
+      "activeTab",
+    "tabs",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "http://127.0.0.1:8000/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/problems/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}

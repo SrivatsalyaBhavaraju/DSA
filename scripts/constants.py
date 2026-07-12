@@ -13,3 +13,8 @@ LANGUAGE_EXTENSIONS = {
     "javascript": ".js",
     "typescript": ".ts",
 }
+APPROACH_MAP = {
+    "Brute Force": "01_brute_force",
+    "Better": "02_better",
+    "Optimal": "03_optimal",
+}

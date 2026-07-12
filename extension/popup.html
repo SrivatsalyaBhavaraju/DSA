@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>DSA Sync</title>
+
+    <link rel="stylesheet" href="popup.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📘 DSA Sync</h1>
+
+    <p class="subtitle">
+        Organize your accepted solution
+    </p>
+
+    <div class="divider"></div>
+
+    <label>Problem Number</label>
+
+<input
+    id="problemNumber"
+    type="number"
+    placeholder="e.g. 560"
+/>
+
+<label>Problem Title</label>
+
+<div class="readonly" id="problem">
+    Loading...
+</div>
+
+    <label>Language</label>
+
+    <div class="readonly" id="language">
+        C++
+    </div>
+
+    <div class="divider"></div>
+
+    <label>Category</label>
+
+    <select id="category">
+
+        <option>Arrays</option>
+        <option>Strings</option>
+        <option>Linked List</option>
+        <option>Stack</option>
+        <option>Queue</option>
+        <option>Trees</option>
+        <option>BST</option>
+        <option>Heap</option>
+        <option>Graph</option>
+        <option>Dynamic Programming</option>
+
+    </select>
+
+    <label>Pattern</label>
+
+    <select id="pattern">
+
+        <option>Prefix Sum</option>
+        <option>Sliding Window</option>
+        <option>Two Pointers</option>
+        <option>Binary Search</option>
+        <option>Hash Map</option>
+        <option>DFS</option>
+        <option>BFS</option>
+        <option>Recursion</option>
+
+    </select>
+
+    <div class="divider"></div>
+
+    <label>Approach</label>
+
+    <div class="approach-buttons">
+
+        <button class="approach active">
+            Brute Force
+        </button>
+
+        <button class="approach">
+            Better
+        </button>
+
+        <button class="approach">
+            Optimal
+        </button>
+
+    </div>
+
+    <button id="save">
+
+        Save
+
+    </button>
+
+</div>
+
+<script src="popup.js"></script>
+
+</body>
+
+</html>
