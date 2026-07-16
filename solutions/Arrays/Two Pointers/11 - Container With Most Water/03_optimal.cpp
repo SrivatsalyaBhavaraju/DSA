@@ -4,7 +4,7 @@ public:
         int left=0;
         int n=height.size();
         int right=n-1;
-        int maximumareaa=1;
+        int maximumareaa=0;
         while(left<right){
             int area;
             
