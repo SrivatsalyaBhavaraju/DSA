@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from constants import SOLUTIONS_DIR, LANGUAGE_EXTENSIONS, APPROACH_MAP
+from .constants import SOLUTIONS_DIR, LANGUAGE_EXTENSIONS, APPROACH_MAP
 
 
 class FileManager:

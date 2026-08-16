@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from git_manager import GitManager
-from models import Submission
-from file_manager import FileManager
+from .git_manager import GitManager
+from .models import Submission
+from .file_manager import FileManager
 
 app = FastAPI(
     title="DSA Automation API",
